@@ -22,7 +22,7 @@ module.exports = {
     },
   },
   rules: {
-    '@typescript-eslint/explicit-module-boundary-types': ['warning'],
+    '@typescript-eslint/explicit-module-boundary-types': ['warn'],
     semi: ['error', 'never'],
     'arrow-parens': ['error', 'as-needed'],
     'no-trailing-spaces': 'error',

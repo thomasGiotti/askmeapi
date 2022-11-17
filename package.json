@@ -9,13 +9,13 @@
     "build": "tsc",
     "docker": "docker-compose up -d",
     "lint": "eslint './src/**/*.ts'",
-    "check": "prettier --config .prettierrc './src/**/*.+(js|json|ts)' --check --ignore-unknown",
+    "prettier:check": "prettier --config .prettierrc './src/**/*.+(js|json|ts)' --check --ignore-unknown",
     "prettier:write": "prettier --config .prettierrc './src/**/*.+(js|json|ts)' --write --ignore-unknown"
   },
   "lint-staged": {
     "./src/**/*.+(ts|js)": [
       "yarn lint",
-      "yarn check"
+      "yarn prettier:check"
     ]
   },
   "keywords": [],
@@ -23,6 +23,8 @@
   "license": "ISC",
   "dependencies": {
     "eslint": "^8.0.1",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-config-prettier": "^8.5.0",
     "eslint-import-resolver-typescript": "^3.5.2",
     "eslint-plugin-prettier": "^4.2.1",
     "express": "^4.18.2",
