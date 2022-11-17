@@ -7,7 +7,16 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon src/index.ts",
     "build": "tsc",
-    "docker": "docker-compose up -d"
+    "docker": "docker-compose up -d",
+    "lint": "eslint './src/**/*.ts'",
+    "check": "prettier --config .prettierrc './src/**/*.+(js|json|ts)' --check --ignore-unknown",
+    "prettier:write": "prettier --config .prettierrc './src/**/*.+(js|json|ts)' --write --ignore-unknown"
+  },
+  "lint-staged": {
+    "./src/**/*.+(ts|js)": [
+      "yarn lint",
+      "yarn check"
+    ]
   },
   "keywords": [],
   "author": "",
