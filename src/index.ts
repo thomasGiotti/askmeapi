@@ -1,20 +1,32 @@
+import { ApolloServer } from 'apollo-server-express'
 import * as express from 'express'
-import { graphqlHTTP } from 'express-graphql'
-import { buildSchema, GraphQLSchema } from 'graphql'
+import { ApolloServerPluginDrainHttpServer } from 'apollo-server-core'
+import { createServer } from 'http'
+import Schema from './Schemas/Schema'
+import Resolvers from './Resolvers/Resolvers'
 
-const schema: GraphQLSchema = buildSchema(`type Query {
-  hello : String
-}`)
+const startApolloServer = async (schema: any, resolvers: any) => {
+  const app = express()
+  const httpServer = createServer(app)
+  // middleware
+  app.use(express.json())
+  // Create apollo server
+  const server = new ApolloServer({
+    typeDefs: schema,
+    resolvers,
+    // tell Express to attach GraphQL functionality to the server
+    plugins: [ApolloServerPluginDrainHttpServer({ httpServer })],
+  }) as any
 
-const app = express()
+  await server.start() //  start the GraphQL server.
+  server.applyMiddleware({ app })
 
-const PORT = 3000
-const root = { hello: () => 'hello world from graphQL' }
-app.get('/', (req, res) => {
-  res.send('Hello World!')
-})
-app.use('/graphql', graphqlHTTP({ schema, rootValue: root, graphiql: true }))
-// TODO logger
-app.listen(PORT, () => {
-  console.log(`AskMe API is running on port http://localhost:${PORT}/graphql`)
-})
+  await new Promise<void>(
+    resolve => {
+      httpServer.listen({ port: 4000 }, resolve)
+    } // run the server on port 4000
+  )
+  console.log(`Server ready at http://localhost:4000${server.graphqlPath}`)
+}
+// in the end, run the server and pass in our Schema and Resolver.
+startApolloServer(Schema, Resolvers)
