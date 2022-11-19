@@ -1,19 +1,14 @@
 {
   "compilerOptions": {
+    "target": "es2018",
+    "lib": ["ES2018", "ESNext.AsyncIterable"],
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
     "module": "commonjs",
-    "target": "esnext",
-    "moduleResolution": "node",
-    "sourceMap": true,
-    "outDir": "build",
-    "allowJs": true,
-    "lib": ["dom", "es6"],
-    "baseUrl": "./src",
-    "paths": {
-      "@/*": ["./*"]
-    },
-    "allowSyntheticDefaultImports": true
-  },
-  "exclude": ["node_modules", "dist"],
-  "include": ["src/**/*.ts", "tests/**/*.spec.ts"],
-  "files": ["src/index.ts"]
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "strictPropertyInitialization": false,
+    "skipLibCheck": true
+  }
 }

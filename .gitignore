@@ -8,8 +8,7 @@ lerna-debug.log*
 .pnpm-debug.log*
 
 
-#dockercompose cause it suck 😃
-docker-compose.yml
+.env
 
 /build/
 

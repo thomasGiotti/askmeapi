@@ -22,6 +22,7 @@ module.exports = {
     },
   },
   rules: {
+    'no-use-before-define': ['error', { variables: false }],
     '@typescript-eslint/explicit-module-boundary-types': ['warn'],
     semi: ['error', 'never'],
     'arrow-parens': ['error', 'as-needed'],
